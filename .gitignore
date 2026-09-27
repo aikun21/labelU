@@ -170,3 +170,15 @@ cython_debug/
 # if the local history plugin is installed in vscode, when we modify or add code, a folder
 # .history will be added in project, but it is not the needed file.
 .history/
+
+# Prebuilt frontend downloaded from labelU-Kit releases (see scripts/fetch_frontend.ps1)
+labelu/internal/statics/*
+!labelu/internal/statics/__init__.py
+
+# Desktop (Electron) build outputs
+desktop/node_modules/
+desktop/release/
+desktop/backend/build/
+desktop/backend/dist/
+!desktop/backend/labelu-server.spec
+!desktop/build/

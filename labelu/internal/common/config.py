@@ -1,9 +1,14 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
 from loguru import logger
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+# Load .env from the working directory before computing defaults that depend
+# on environment variables (e.g. LABELU_DATA_DIR used by get_data_dir).
+load_dotenv()
 
 from labelu.internal.common.io import get_data_dir
 

@@ -55,7 +55,17 @@ Layered architecture following Domain-Driven Design principles:
 - `DATABASE_URL`: DB connection string (default: `sqlite:///<data_dir>/labelu.sqlite`)
 - `MEDIA_HOST`: Media file serving host URL (default: `http://localhost:8000`)
 
-Data directory is determined by `appdirs.user_data_dir("labelu")`.
+- `LABELU_DATA_DIR`: Data directory for the SQLite db and media (default: `appdirs.user_data_dir("labelu")`)
+
+`.env` in the working directory is loaded at startup (`config.py`); the local `.env` sets `LABELU_DATA_DIR=./data`.
+
+## Desktop App (Electron)
+
+- `desktop/` - Electron shell that spawns the backend and shows the UI in a native window (see `desktop/README.md`)
+- `labelu/desktop.py` - Backend entry used by Electron (`--port`, `--data-dir`, `--parent-pid`)
+- `desktop/backend/labelu-server.spec` - PyInstaller spec; migration scripts are loaded from disk, so modules they import must be in `hiddenimports`
+- Dev: `cd desktop && npm start` (uses `.venv`); Build exe: `scripts/build_desktop.ps1`
+- Frontend is prebuilt from labelU-Kit releases (`.VERSION`), fetched by `scripts/fetch_frontend.ps1` into `labelu/internal/statics/` (gitignored)
 
 ## Tech Stack
 

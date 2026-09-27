@@ -1,0 +1,51 @@
+{
+  "name": "video-annotator",
+  "productName": "VideoAnnotator",
+  "version": "0.1.0",
+  "description": "Desktop video annotation tool based on LabelU",
+  "main": "main.js",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win",
+    "dist:dir": "electron-builder --win --dir"
+  },
+  "devDependencies": {
+    "electron": "^44.4.5",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.aikun21.videoannotator",
+    "productName": "VideoAnnotator",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "main.js",
+      "loading.html",
+      "assets/**",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "backend/dist/labelu-server",
+        "to": "backend"
+      }
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ],
+      "icon": "build/icon.ico",
+      "artifactName": "VideoAnnotator-${version}-win-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "VideoAnnotator-Setup-${version}.exe"
+    }
+  }
+}
